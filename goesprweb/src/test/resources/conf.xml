@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Document : configMyPipeline.xml Description: An example Pipeline configuration 
+	file -->
+
+<pipeline>
+
+	<driverFactory
+		className="org.apache.commons.pipeline.driver.DedicatedThreadStageDriverFactory"
+		id="df0" />
+	<driverFactory
+		className="org.apache.commons.pipeline.driver.ThreadPoolStageDriverFactory"
+		id="tdf"/>
+	<!-- The <env> element can be used to add global environment variable values 
+		to the pipeline. In this instance almost all of the stages need a key to 
+		tell them what type of data to process. -->
+	<env>
+		<value key="dataType">STLD</value>
+	</env>
+
+
+	<stage className="edu.uprm.ece.hydroclimate.main.stage.MakeDirectoriesStage" 
+		 driverFactoryId = "df0"/>
+
+	<!-- Makes the necessary directories -->
+	<!-- <stage className="hydroclimate.ece.uprm.edu.stage.config.DirectoryMakerStage" 
+		driverFactoryId ="df0" loaderClass="hydroclimate.ece.uprm.edu.stage.config.loader.JsonStageConfigLoader" 
+		configPath="conf/DirectoryMakerStageConfig.json" /> -->
+
+	<!-- Starts the pipeline with a range of dates -->
+	<!-- <stage className="hydroclimate.ece.uprm.edu.stage.GoesStarterFromToStage" 
+		startDate="-4" endDate="today" driverFactoryId="df0" /> -->
+
+	<!-- <stage className=" hydroclimate.ece.uprm.edu.stage.HttpFileDownloadStage 
+		" driverFactoryId="df0" downloadDirectory="download" loaderClass="hydroclimate.ece.uprm.edu.stage.config.loader.JsonStageConfigLoader" 
+		configPath="conf/config.json" /> -->
+
+
+
+	<stage className="edu.uprm.ece.hydroclimate.main.stage.FormatDownloadsStage"
+		driverFactoryId ="df0"/>
+		
+	<stage className="edu.uprm.ece.hydroclimate.main.stage.CheckIfDownloadExistsStage"
+		driverFactoryId ="df0"/>	
+	<stage className="edu.uprm.ece.hydroclimate.main.stage.DownloadStage"
+		driverFactoryId ="tdf"/>
+
+	<!-- Write the data from the SstFileReader stage into the Rich Inventory 
+		database. -->
+
+
+</pipeline>

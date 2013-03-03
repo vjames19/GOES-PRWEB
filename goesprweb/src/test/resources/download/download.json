@@ -1,0 +1,7 @@
+{
+	"saveIn":"src/test/resources/outdownload.txt",
+	"url":"http://wordpress.org/extend/plugins/about/readme.txt",
+	"replaceUrl":true,
+	"dateOffset":1
+
+}
