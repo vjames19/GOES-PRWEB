@@ -28,7 +28,7 @@ import edu.uprm.ece.hydroclimate.stage.GoesEnvironment;
  * 
  */
 
-//TODO: make inmutable  classes
+// TODO: make inmutable classes
 public class AutomateGoes {
 
 	// private DirectoryManager manager;
@@ -44,13 +44,15 @@ public class AutomateGoes {
 	// }
 	//
 
-	public static void main(String[] args) throws ParseException, MalformedURLException, JsonSyntaxException, JsonIOException, FileNotFoundException, PipelineCreationException {
+	public static void main(String[] args) throws ParseException,
+			MalformedURLException, JsonSyntaxException, JsonIOException,
+			FileNotFoundException, PipelineCreationException {
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
 		Date start = dateFormatter.parse("2013/03/04"), end = dateFormatter
 				.parse("2013/03/04");
 
 		File configFile = new File("src/test/resources/conf.xml");
-		//File configFile = new File("src/test/resources/conf_degrib.xml");
+		// File configFile = new File("src/test/resources/conf_degrib.xml");
 		// Log log = LogFactory.getLog("");
 		// log.debug("Starting");
 		String properties = "src/test/resources/goesproperties.json";
@@ -78,7 +80,8 @@ public class AutomateGoes {
 
 		while (!start.after(end)) {
 			feeder.feed(start);
-			//feeder.feed(new FileBundle(new File("src/test/resources/stage/"), start));
+			// feeder.feed(new FileBundle(new File("src/test/resources/stage/"),
+			// start));
 			start = DateUtils.addDays(start, 1);
 		}
 
@@ -92,11 +95,11 @@ public class AutomateGoes {
 
 	}
 
-//	public Date getDate() {
-//		return date;
-//	}
-//
-//	public void setDate(Date date) {
-//		this.date = date;
-//	}
+	// public Date getDate() {
+	// return date;
+	// }
+	//
+	// public void setDate(Date date) {
+	// this.date = date;
+	// }
 }

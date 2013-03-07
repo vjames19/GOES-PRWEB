@@ -1,27 +1,27 @@
 package edu.uprm.ece.hydroclimate.download;
+
 //TODO verify if saveIn needs to be changed!
 public class Download {
 
-
-	
 	private String url;
 	/**
 	 * Where to save the downloaded file
 	 */
 	private String saveIn;
 	/**
-	 * If an offset is specified is going to be added to yesterdays data
-	 * in which the Automation is run.
+	 * If an offset is specified is going to be added to yesterdays data in
+	 * which the Automation is run.
 	 */
 	private int dateOffset;
 	/**
 	 * Fully qualified name of the Downloader Class
 	 */
 	private String downloaderClass;
-	
-	
-	public Download(){}
-	public Download(Download download){
+
+	public Download() {
+	}
+
+	public Download(Download download) {
 		this.url = new String(download.url);
 		this.saveIn = new String(download.saveIn);
 		this.dateOffset = download.dateOffset;
@@ -74,11 +74,5 @@ public class Download {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
-	
-	
-	
 
 }

@@ -6,16 +6,12 @@ import edu.uprm.ece.hydroclimate.download.Download;
 
 public class DownloadBundle extends DataBundle<Download> {
 
-	
-	public DownloadBundle(Download d, Date date){
+	public DownloadBundle(Download d, Date date) {
 		super(d, date);
 	}
-	
-	public DownloadBundle(DownloadBundle bundle){
+
+	public DownloadBundle(DownloadBundle bundle) {
 		this(new Download(bundle.data), bundle.date);
 	}
 
-
-
-	
 }

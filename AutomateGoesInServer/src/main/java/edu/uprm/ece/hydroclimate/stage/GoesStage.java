@@ -11,7 +11,6 @@ public class GoesStage extends BaseStage {
 	protected GoesProperties properties;
 	protected DirectoryManager manager;
 
-	
 	@Override
 	public void init(StageContext context) {
 		// TODO Auto-generated method stub
@@ -21,11 +20,11 @@ public class GoesStage extends BaseStage {
 		manager = environment.getManager();
 	}
 
-//	public static synchronized Date getDate() {
-//		return date;
-//	}
-//	public static synchronized void setDate(Date date) {
-//		GoesStage.date = date;
-//	}
+	// public static synchronized Date getDate() {
+	// return date;
+	// }
+	// public static synchronized void setDate(Date date) {
+	// GoesStage.date = date;
+	// }
 
 }

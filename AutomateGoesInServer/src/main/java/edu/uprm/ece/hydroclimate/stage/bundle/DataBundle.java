@@ -6,13 +6,12 @@ public class DataBundle<T> {
 
 	protected T data;
 	protected Date date;
-	
-	public DataBundle(){
-		
+
+	public DataBundle() {
+
 	}
-	
-	
-	public DataBundle(T data, Date date){
+
+	public DataBundle(T data, Date date) {
 		this.setDate(date);
 		this.setData(data);
 	}
@@ -33,7 +32,6 @@ public class DataBundle<T> {
 		this.date = new Date(date.getTime());
 	}
 
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -44,6 +42,5 @@ public class DataBundle<T> {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 }

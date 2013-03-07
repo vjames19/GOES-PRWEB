@@ -2,20 +2,21 @@ package edu.uprm.ece.hydroclimate.degrib;
 
 import java.util.List;
 
-public class DegribVariable implements Cloneable{
-	
+public class DegribVariable implements Cloneable {
+
 	private String name;
 	private String outputName;
 	private List<Integer> messages;
-	
-	public DegribVariable(){}
 
-	public DegribVariable(DegribVariable variable){
+	public DegribVariable() {
+	}
+
+	public DegribVariable(DegribVariable variable) {
 		this.name = new String(variable.name);
 		this.outputName = new String(variable.outputName);
 		this.messages = variable.messages;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -52,8 +53,5 @@ public class DegribVariable implements Cloneable{
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
 
 }

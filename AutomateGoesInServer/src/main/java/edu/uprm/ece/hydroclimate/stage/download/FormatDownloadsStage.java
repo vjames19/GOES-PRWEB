@@ -1,7 +1,6 @@
 package edu.uprm.ece.hydroclimate.stage.download;
 
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.time.DateUtils;

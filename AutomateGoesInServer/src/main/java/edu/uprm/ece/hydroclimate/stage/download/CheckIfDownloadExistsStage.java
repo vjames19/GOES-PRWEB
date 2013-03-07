@@ -14,15 +14,14 @@ import edu.uprm.ece.hydroclimate.stage.bundle.DownloadBundle;
 @ProducesConsumed
 public class CheckIfDownloadExistsStage extends GoesStage {
 
-	
 	@Override
 	public void process(Object obj) throws StageException {
 		DownloadBundle db = (DownloadBundle) obj;
 		Download download = db.getData();
 		Downloader downloader = DownloaderFactory.getDownloader(download);
-		if(downloader.exists()){
+		if (downloader.exists()) {
 			this.emit(db);
 		}
-		//TODO: wait for download to appear
+		// TODO: wait for download to appear
 	}
 }

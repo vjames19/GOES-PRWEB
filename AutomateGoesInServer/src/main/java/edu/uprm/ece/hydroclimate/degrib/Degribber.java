@@ -3,18 +3,14 @@ package edu.uprm.ece.hydroclimate.degrib;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteStreamHandler;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.log4j.LogMF;
 import org.apache.log4j.Logger;
 
@@ -106,7 +102,7 @@ public class Degribber {
 			try {
 				LogMF.info(logger, "Degrib output {0}", IOUtils.toString(is));
 			} catch (IOException ignore) {
-				
+
 			}
 			IOUtils.closeQuietly(is);
 		}

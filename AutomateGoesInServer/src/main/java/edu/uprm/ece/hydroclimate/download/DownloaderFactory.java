@@ -11,14 +11,15 @@ import org.apache.log4j.Logger;
 public class DownloaderFactory {
 
 	private static Logger logger = Logger.getLogger(Downloader.class);
-	
 
 	/**
 	 * Gets a downloader based on the download specified downloader.
-	 * @param download Used to find the Downloader
-	 *            
-	 * @return Downloader initialized with the supplied download.Null if it doesn't
-	 *            find the Downloader class.
+	 * 
+	 * @param download
+	 *            Used to find the Downloader
+	 * 
+	 * @return Downloader initialized with the supplied download.Null if it
+	 *         doesn't find the Downloader class.
 	 */
 	public static Downloader getDownloader(Download download) {
 		Class<?> clazz;
@@ -42,35 +43,35 @@ public class DownloaderFactory {
 		return downloader;
 	}
 
-//	/**
-//	 * Empty implementation of the {@link Downloader} interface
-//	 * 
-//	 * @author Victor J.
-//	 * 
-//	 */
-//	public static class NullDownloader implements Downloader {
-//
-//		@Override
-//		public boolean exists() {
-//
-//			return false;
-//		}
-//
-//		@Override
-//		public void download() throws IOException {
-//
-//		}
-//
-//		@Override
-//		public void setDownload(Download download) {
-//
-//		}
-//
-//		@Override
-//		public Download getDownload() {
-//			return null;
-//		}
-//
-//	}
+	// /**
+	// * Empty implementation of the {@link Downloader} interface
+	// *
+	// * @author Victor J.
+	// *
+	// */
+	// public static class NullDownloader implements Downloader {
+	//
+	// @Override
+	// public boolean exists() {
+	//
+	// return false;
+	// }
+	//
+	// @Override
+	// public void download() throws IOException {
+	//
+	// }
+	//
+	// @Override
+	// public void setDownload(Download download) {
+	//
+	// }
+	//
+	// @Override
+	// public Download getDownload() {
+	// return null;
+	// }
+	//
+	// }
 
 }

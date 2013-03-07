@@ -17,7 +17,6 @@ import org.apache.log4j.LogMF;
 import org.apache.log4j.Logger;
 
 import edu.uprm.ece.hydroclimate.degrib.DegribVariable;
-import edu.uprm.ece.hydroclimate.degrib.Degribber;
 import edu.uprm.ece.hydroclimate.stage.GoesStage;
 import edu.uprm.ece.hydroclimate.stage.bundle.DegribBundle;
 import edu.uprm.ece.hydroclimate.stage.bundle.FileBundle;
@@ -26,33 +25,33 @@ import edu.uprm.ece.hydroclimate.stage.bundle.FileBundle;
 @ProducedTypes(DegribBundle.class)
 public class DegribFilterStage extends GoesStage {
 
-	private Map<DegribVariable,IOFileFilter> filters;
-	private static final Logger logger = Logger.getLogger(DegribFilterStage.class);
-	
+	private Map<DegribVariable, IOFileFilter> filters;
+	private static final Logger logger = Logger
+			.getLogger(DegribFilterStage.class);
+
 	@Override
 	public void init(StageContext context) {
 		// TODO Auto-generated method stub
 		super.init(context);
 		List<DegribVariable> variables = properties.getDegribVariables();
-		filters = new HashMap<DegribVariable,IOFileFilter>(variables.size());
-		for(DegribVariable var: variables){
-			filters.put(var,new WildcardFileFilter(var.getName()));
+		filters = new HashMap<DegribVariable, IOFileFilter>(variables.size());
+		for (DegribVariable var : variables) {
+			filters.put(var, new WildcardFileFilter(var.getName()));
 		}
 	}
-	
+
 	@Override
 	public void process(Object obj) throws StageException {
 		FileBundle fb = (FileBundle) obj;
 		File file = fb.getData();
 		Date date = fb.getDate();
-		for(Entry<DegribVariable, IOFileFilter> filter: filters.entrySet()){
-			if(filter.getValue().accept(file)){
-				LogMF.debug(logger,"Emmitting file {0}", file);
-				this.emit(new DegribBundle(file,filter.getKey(),date ));
+		for (Entry<DegribVariable, IOFileFilter> filter : filters.entrySet()) {
+			if (filter.getValue().accept(file)) {
+				LogMF.debug(logger, "Emmitting file {0}", file);
+				this.emit(new DegribBundle(file, filter.getKey(), date));
 				return;
 			}
 		}
 	}
-
 
 }

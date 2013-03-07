@@ -7,7 +7,6 @@ import org.apache.commons.pipeline.StageContext;
 import org.apache.commons.pipeline.StageException;
 import org.apache.commons.pipeline.validation.ConsumedTypes;
 import org.apache.commons.pipeline.validation.ProducesConsumed;
-import org.apache.log4j.LogMF;
 import org.apache.log4j.Logger;
 
 import edu.uprm.ece.hydroclimate.degrib.Degribber;
@@ -21,6 +20,7 @@ public class DegribStage extends GoesStage {
 
 	private static final Logger logger = Logger.getLogger(DegribStage.class);
 	private String exeLocation;
+
 	@Override
 	public void init(StageContext context) {
 		// TODO Auto-generated method stub
@@ -34,10 +34,12 @@ public class DegribStage extends GoesStage {
 		File input = db.getData();
 		File outputDir = manager.getDirectory(db.getDate());
 		int message = db.getMessage();
-		String name = GoesUtils.stringFormatTime(db.getVariable().getOutputName() +message,db.getDate());
+		String name = GoesUtils.stringFormatTime(db.getVariable()
+				.getOutputName() + message, db.getDate());
 		File outputFile = FileUtils.getFile(outputDir, name);
-		boolean result = Degribber.degrib(input, outputFile, getExeLocation(), message);
-		if(result){
+		boolean result = Degribber.degrib(input, outputFile, getExeLocation(),
+				message);
+		if (result) {
 			this.emit(outputFile);
 		}
 	}

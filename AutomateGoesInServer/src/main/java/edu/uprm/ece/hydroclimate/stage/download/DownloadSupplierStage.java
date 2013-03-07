@@ -15,12 +15,11 @@ import edu.uprm.ece.hydroclimate.stage.bundle.DownloadBundle;
 @ProducedTypes(DownloadBundle.class)
 public class DownloadSupplierStage extends GoesStage {
 
-	
 	@Override
 	public void process(Object obj) throws StageException {
 		DataBundle<?> db = (DataBundle<?>) obj;
 		List<Download> downloads = properties.getDownloads();
-		for(Download download:downloads){
+		for (Download download : downloads) {
 			this.emit(new DownloadBundle(new Download(download), db.getDate()));
 		}
 	}

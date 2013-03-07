@@ -19,14 +19,14 @@ import edu.uprm.ece.hydroclimate.stage.bundle.FileBundle;
 @ProducedTypes(FileBundle.class)
 public class DownloadStage extends BaseStage {
 
-
 	private static final Logger logger = Logger.getLogger(DownloadStage.class);
+
 	@Override
 	public void process(Object obj) throws StageException {
 		DownloadBundle db = (DownloadBundle) obj;
 		Download download = db.getData();
 		Downloader downloader = DownloaderFactory.getDownloader(download);
-		if(downloader == null){
+		if (downloader == null) {
 			logger.error("Couldn't find a downloader for " + download);
 			return;
 		}
@@ -38,6 +38,5 @@ public class DownloadStage extends BaseStage {
 			logger.error("Error downloading", e);
 		}
 	}
-	
 
 }

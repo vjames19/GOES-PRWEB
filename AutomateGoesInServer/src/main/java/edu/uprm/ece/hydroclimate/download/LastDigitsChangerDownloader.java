@@ -11,35 +11,44 @@ import org.apache.log4j.Logger;
 import edu.uprm.ece.hydroclimate.utils.HttpUtils;
 
 /**
- * Downloader which changes the last two digits of the url, trying to match which file is on the server.
+ * Downloader which changes the last two digits of the url, trying to match
+ * which file is on the server.
  * 
- * <p>e.g. The file on the server is http://goes.edu/goes1233</p>
- * <pre>The client of this class will supply http://goes.edu/goes12 as the url</pre>
- * Then the class will iterate from 0 to 60 trying to identify which is the correct url
+ * <p>
+ * e.g. The file on the server is http://goes.edu/goes1233
+ * </p>
+ * 
+ * <pre>
+ * The client of this class will supply http://goes.edu/goes12 as the url
+ * </pre>
+ * 
+ * Then the class will iterate from 0 to 60 trying to identify which is the
+ * correct url
+ * 
  * @author Victor J.
- *
+ * 
  */
 public class LastDigitsChangerDownloader implements Downloader {
 
 	private Download download;
 	private static Logger logger = Logger
 			.getLogger(LastDigitsChangerDownloader.class);
-	
-	
-	public LastDigitsChangerDownloader(){}
-	
-	public LastDigitsChangerDownloader(Download download){
+
+	public LastDigitsChangerDownloader() {
+	}
+
+	public LastDigitsChangerDownloader(Download download) {
 		this.download = download;
 	}
 
 	@Override
 	public boolean exists() {
 		URL url = getValidUrl();
-		if (url != null){
+		if (url != null) {
 			download.setUrl(url.toString());
 			return true;
 		}
-	
+
 		return false;
 	}
 
@@ -55,11 +64,12 @@ public class LastDigitsChangerDownloader implements Downloader {
 	private URL getValidUrl() {
 		String url = download.getUrl();
 		LogMF.debug(logger, "Got the following url to validate {0}", url);
-		if(url == null)
+		if (url == null)
 			return null;
 		URL workingUrl = null;
 		for (int i = 35; i <= 60; i++) {
-			String tempUrl = url + String.format("%02d", i);;
+			String tempUrl = url + String.format("%02d", i);
+			;
 
 			try {
 				workingUrl = new URL(tempUrl);
@@ -73,14 +83,14 @@ public class LastDigitsChangerDownloader implements Downloader {
 				return workingUrl;
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	@Override
 	public void setDownload(Download download) {
 		this.download = download;
-		
+
 	}
 
 	@Override
@@ -93,5 +103,5 @@ public class LastDigitsChangerDownloader implements Downloader {
 		// TODO Auto-generated method stub
 		return download();
 	}
-	
+
 }
