@@ -11,9 +11,6 @@ public class DataBundle<T> {
 		
 	}
 	
-	public DataBundle(T data){
-		this(data, new Date());
-	}
 	
 	public DataBundle(T data, Date date){
 		this.setDate(date);

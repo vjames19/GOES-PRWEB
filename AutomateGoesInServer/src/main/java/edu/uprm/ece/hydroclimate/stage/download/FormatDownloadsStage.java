@@ -1,4 +1,4 @@
-package edu.uprm.ece.hydroclimate.main.stage.download;
+package edu.uprm.ece.hydroclimate.stage.download;
 
 import java.util.Date;
 import java.util.List;
@@ -11,38 +11,36 @@ import org.apache.commons.pipeline.validation.ProducesConsumed;
 import org.apache.log4j.Logger;
 
 import edu.uprm.ece.hydroclimate.download.Download;
-import edu.uprm.ece.hydroclimate.main.stage.GoesStage;
-import edu.uprm.ece.hydroclimate.main.stage.pojo.DownloadBundle;
+import edu.uprm.ece.hydroclimate.stage.GoesStage;
+import edu.uprm.ece.hydroclimate.stage.bundle.DownloadBundle;
 import edu.uprm.ece.hydroclimate.utils.GoesUtils;
 
 @ConsumedTypes(DownloadBundle.class)
 @ProducesConsumed
-public class FormatDownloadsStage extends GoesStage{
+public class FormatDownloadsStage extends GoesStage {
 
+	private static final Logger logger = Logger
+			.getLogger(FormatDownloadsStage.class);
 
-	private static final Logger logger = Logger.getLogger(FormatDownloadsStage.class);
 	@Override
 	public void process(Object obj) throws StageException {
 		// TODO Auto-generated method stub
 		DownloadBundle downloadBundle = (DownloadBundle) obj;
 		Date date = downloadBundle.getDate();
 		String absolute = manager.getDirectory(date).getAbsolutePath();
-		List<Download> downloads = properties.getDownloads();
-		for(Download download: downloads){
-			Download tempDownload = new Download(download);
-			
-			Date temp = DateUtils.addDays(date, tempDownload.getDateOffset());
-			tempDownload.setUrl(format(temp, download.getUrl()));
-			tempDownload.setSaveIn(FilenameUtils.concat(absolute,
-					format(temp, download.getSaveIn())));
-			logger.info("Emmitting " + tempDownload);
-			this.emit(tempDownload);
-		}
+		Download download = downloadBundle.getData();
+		Date temp = DateUtils.addDays(date, download.getDateOffset());
+		download.setUrl(format(temp, download.getUrl()));
+		download.setSaveIn(FilenameUtils.concat(absolute,
+				format(temp, download.getSaveIn())));
+		this.emit(new DownloadBundle(download, date));
+
 	}
-	
+
 	private String format(Date date, String format) {
 		return GoesUtils.stringFormatTime(format, date);
 	}
+
 	/**
 	 * @param args
 	 */

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Document : configMyPipeline.xml Description: An example Pipeline configuration 
+	file -->
+
+<pipeline>
+
+	<driverFactory
+		className="org.apache.commons.pipeline.driver.DedicatedThreadStageDriverFactory"
+		id="df0" />
+	<driverFactory
+		className="org.apache.commons.pipeline.driver.ThreadPoolStageDriverFactory"
+		id="tdf" numThreads = "5"/>
+		
+		<driverFactory
+		className="org.apache.commons.pipeline.driver.ThreadPoolStageDriverFactory"
+		id="t" numThreads = "15"/>
+	<!-- The <env> element can be used to add global environment variable values 
+		to the pipeline. In this instance almost all of the stages need a key to 
+		tell them what type of data to process. -->
+
+	<stage className="edu.uprm.ece.hydroclimate.stage.MakeDirectoriesStage" 
+		driverFactoryId = "df0"/>
+
+	<!-- Download-->
+	<stage className="edu.uprm.ece.hydroclimate.stage.download.DownloadSupplierStage"
+		driverFactoryId ="df0"/>
+	<stage className="edu.uprm.ece.hydroclimate.stage.download.FormatDownloadsStage"
+		driverFactoryId ="df0"/>
+		
+	<stage className="edu.uprm.ece.hydroclimate.stage.download.CheckIfDownloadExistsStage"
+		driverFactoryId ="tdf"/>	
+	<stage className="edu.uprm.ece.hydroclimate.stage.download.DownloadStage"
+		driverFactoryId ="tdf"/>
+
+	<!-- Degrib -->
+	<stage className = "edu.uprm.ece.hydroclimate.stage.degrib.DegribFilterStage"
+		driverFactoryId = "tdf"/>
+		   
+	<stage className = "edu.uprm.ece.hydroclimate.stage.degrib.DegribMessageSeparatorStage"
+		driverFactoryId = "tdf"/>
+		
+	<stage className = "edu.uprm.ece.hydroclimate.stage.degrib.DegribStage"
+		driverFactoryId = "t" exeLocation = "C:\\ndfd\\degrib\\bin\\degrib.exe"/>
+
+
+
+</pipeline>

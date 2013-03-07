@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Document : configMyPipeline.xml Description: An example Pipeline configuration 
+	file -->
+
+<pipeline>
+
+	<driverFactory
+		className="org.apache.commons.pipeline.driver.DedicatedThreadStageDriverFactory"
+		id="df0" />
+	<driverFactory
+		className="org.apache.commons.pipeline.driver.ThreadPoolStageDriverFactory"
+		id="tdf"/>
+	<!-- The <env> element can be used to add global environment variable values 
+		to the pipeline. In this instance almost all of the stages need a key to 
+		tell them what type of data to process. -->
+
+	<stage className="edu.uprm.ece.hydroclimate.stage.FileFinderStage" 
+		driverFactoryId = "df0" pattern = ".*\.bin"/>
+
+	<!-- Degrib -->
+	<stage className = "edu.uprm.ece.hydroclimate.stage.degrib.DegribFilterStage"
+		driverFactoryId = "df0"/>
+		   
+	<stage className = "edu.uprm.ece.hydroclimate.stage.degrib.DegribMessageSeparatorStage"
+		driverFactoryId = "df0"/>
+		
+	<stage className = "edu.uprm.ece.hydroclimate.stage.degrib.DegribStage"
+		driverFactoryId = "df0" exeLocation = "C:\\ndfd\\degrib\\bin\\degrib.exe"/>
+
+
+
+</pipeline>

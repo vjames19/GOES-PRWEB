@@ -1,9 +1,9 @@
-package edu.uprm.ece.hydroclimate.main.stage;
+package edu.uprm.ece.hydroclimate.stage;
 
 import org.apache.commons.pipeline.StageContext;
 import org.apache.commons.pipeline.stage.BaseStage;
 
-import edu.uprm.ece.hydroclimate.main.DirectoryManager;
+import edu.uprm.ece.hydroclimate.DirectoryManager;
 import edu.uprm.ece.hydroclimate.properties.GoesProperties;
 
 public class GoesStage extends BaseStage {
@@ -20,13 +20,7 @@ public class GoesStage extends BaseStage {
 		properties = environment.getProperties();
 		manager = environment.getManager();
 	}
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 //	public static synchronized Date getDate() {
 //		return date;
 //	}

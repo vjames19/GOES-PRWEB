@@ -12,7 +12,7 @@ public class DownloadAndDecompressOnlyProcess extends GoesProcess {
 	public void run() {
 		goes.makeDirs();
 		goes.download();
-//		goes.degrib();
+		goes.degrib();
 	}
 
 	

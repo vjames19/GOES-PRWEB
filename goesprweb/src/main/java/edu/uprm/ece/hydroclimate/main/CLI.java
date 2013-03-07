@@ -127,7 +127,7 @@ public class CLI {
 
 			sw.stop();
 			logger.info("Finished in " + sw.toString());
-			goes.emailLog();
+			// goes.emailLog();
 
 		}
 

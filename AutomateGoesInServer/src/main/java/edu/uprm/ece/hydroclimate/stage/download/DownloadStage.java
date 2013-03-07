@@ -1,4 +1,4 @@
-package edu.uprm.ece.hydroclimate.main.stage.download;
+package edu.uprm.ece.hydroclimate.stage.download;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +12,8 @@ import org.apache.log4j.Logger;
 import edu.uprm.ece.hydroclimate.download.Download;
 import edu.uprm.ece.hydroclimate.download.Downloader;
 import edu.uprm.ece.hydroclimate.download.DownloaderFactory;
-import edu.uprm.ece.hydroclimate.main.stage.pojo.DownloadBundle;
-import edu.uprm.ece.hydroclimate.main.stage.pojo.FileBundle;
+import edu.uprm.ece.hydroclimate.stage.bundle.DownloadBundle;
+import edu.uprm.ece.hydroclimate.stage.bundle.FileBundle;
 
 @ConsumedTypes(DownloadBundle.class)
 @ProducedTypes(FileBundle.class)
@@ -33,7 +33,7 @@ public class DownloadStage extends BaseStage {
 		logger.info("Going to download " + download);
 		try {
 			File file = downloader.download();
-			this.emit(file);
+			this.emit(new FileBundle(file, db.getDate()));
 		} catch (IOException e) {
 			logger.error("Error downloading", e);
 		}
